@@ -1,0 +1,21 @@
+@import "src/themes/mixins.scss";
+
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: max-content;
+  width: 80%;
+  text-align: center;
+  margin: 1rem auto;
+}
+
+.logo {
+  @include cool-font;
+  text-decoration: underline;
+  margin: 0 20px;
+  line-height: 2rem;
+  font-size: 2rem;
+}

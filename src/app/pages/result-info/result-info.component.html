@@ -1,0 +1,47 @@
+<p-table [value]="violations" [tableStyle]="{ 'min-width': '50rem' }" [rows]="30"
+         *ngIf="!isLoading">
+  <ng-template pTemplate="caption">
+    <div class="flex align-items-center justify-content-between">
+      Scan Result for {{ result.url }}.<br>
+      {{ result.date | date: 'medium' }}
+    </div>
+  </ng-template>
+
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Violation</th>
+      <th>Description</th>
+      <th>Solution</th>
+      <th>More Info</th>
+      <th>Affected #</th>
+      <th>View</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-violation>
+    <tr>
+      <td><b>{{ violation.name }}</b></td>
+      <td>{{ violation.description }}</td>
+      <td>{{ violation.help }}</td>
+      <td><a href="{{ violation.helpUrl }}" target="_blank">More Info</a></td>
+      <td>
+        <b style="color: darkred">{{ violation.elements.length }}</b>
+      </td>
+      <td>
+        <p-button (click)="showElements(violation.name)" icon="pi pi-search" styleClass="p-button-secondary"></p-button>
+      </td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="summary">
+    <p-button (click)="downloadPdf()" icon="pi pi-file-pdf" label="Download results"
+              styleClass="p-button-warning mb-2"></p-button>
+  </ng-template>
+</p-table>
+<p-dialog header="Affected elements:" [(visible)]="!!elementsToShow.length"
+          [style]="{ width: '50vw', height: '500px', 'text-align': 'left' }" (onHide)="hideElements()">
+  <p *ngFor="let element of elementsToShow" class="element">
+    {{element}}
+  </p>
+</p-dialog>
+<div class="card" *ngIf="isLoading">
+  <p-progressSpinner></p-progressSpinner>
+</div>

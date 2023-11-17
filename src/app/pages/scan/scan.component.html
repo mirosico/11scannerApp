@@ -1,0 +1,28 @@
+<p-toast></p-toast>
+<h1>Make your site accessible</h1>
+<form (ngSubmit)="onSubmit()" #form="ngForm" class="search-form" *ngIf="!isLoading">
+  <div class="search">
+    <input placeholder="Enter your site URL:" pInputText type="url" [(ngModel)]="url" name="url" pattern="https?://.+">
+    <div *ngIf="form.controls['url'].invalid && (form.controls['url'].dirty || form.controls['url'].touched)"
+         class="alert alert-danger">
+      <div *ngIf="form.controls['url'].errors?.['required']">
+        URL is required.
+      </div>
+      <div *ngIf="form.controls['url'].errors?.['pattern']">
+        URL is invalid.
+      </div>
+    </div>
+    <button pButton type="submit" label="Scan your site!" [disabled]="!url || !form.valid"></button>
+  </div>
+  <div>
+    <span class="ignore-label">Do you want to ignore any vulnerabilities?</span>
+    <div class="checkbox-list">
+      <p-checkbox *ngFor="let vulnerability of allVulnerabilities" name="group1" [value]="vulnerability"
+                  [label]="vulnerability" [(ngModel)]="ignoredVulnerabilities"
+                  inputId="ny"></p-checkbox>
+    </div>
+  </div>
+</form>
+<div class="card" *ngIf="isLoading">
+  <p-progressSpinner></p-progressSpinner>
+</div>

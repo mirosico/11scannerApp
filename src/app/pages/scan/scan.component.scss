@@ -1,0 +1,28 @@
+.search {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  justify-content: space-between;
+  input {
+    width: 70%;
+  }
+}
+
+.checkbox-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin: 10px 0;
+}
+
+.search-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+.ignore-label {
+  color: #da7474;
+}
